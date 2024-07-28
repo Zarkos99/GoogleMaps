@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import sweng888.project.googlemaps.MainActivity
 import sweng888.project.googlemaps.databinding.FragmentDashboardBinding
 
@@ -26,10 +29,21 @@ class DashboardFragment : Fragment() {
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
         val main_activity: MainActivity? = activity as MainActivity?
-        //TODO: delete debug
-        Log.d("DEBUG", main_activity?.search_results.toString())
+
+        val recycler_view = binding.recyclerView
+        val place_of_interest_adapter =
+            PlaceOfInterestAdapter(requireContext(), main_activity?.search_results!!)
+        recycler_view.setAdapter(place_of_interest_adapter)
+
+        // Initialize FlexBox Layout Manager for recyclerview
+        val layout_manager = FlexboxLayoutManager(context)
+        layout_manager.apply {
+            flexDirection = FlexDirection.ROW
+            justifyContent = JustifyContent.FLEX_START
+        }
+        recycler_view.layoutManager = layout_manager
+
         return root
     }
 
