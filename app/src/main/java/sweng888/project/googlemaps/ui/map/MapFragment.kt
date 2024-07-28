@@ -146,12 +146,11 @@ class MapFragment : Fragment() {
                 .setMaxResultCount(10)
                 .build()
 
-        var places: List<Place> = listOf()
         // Call placesClient.searchNearby() to perform the search.
         // Define a response handler to process the returned List of Place objects.
         m_places_client.searchNearby(search_nearby_request)
             .addOnSuccessListener { response ->
-                places = response.places
+                val places = response.places
                 if (places.isNotEmpty()) {
                     changeMapFocus(lat_lng, places)
                 } else {
