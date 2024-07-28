@@ -44,8 +44,6 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
-//        StrictMode.setThreadPolicy(policy)
 
         _binding = FragmentMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -168,9 +166,6 @@ class MapFragment : Fragment() {
     private fun changeMapFocus(lat_lng: LatLng, search_results: List<Place>) {
         val main_activity: MainActivity? = activity as MainActivity?
         main_activity?.search_results = search_results
-
-        //TODO: delete debug
-        Log.d("DEBUG", search_results.toString())
 
         m_google_map.clear()
         val camera_position = CameraPosition.builder()
